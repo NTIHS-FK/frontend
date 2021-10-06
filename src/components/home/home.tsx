@@ -1,4 +1,5 @@
 import React from 'react';
+import links from './link.json';
 import './home.sass';
 
 const Home = () => {
@@ -22,8 +23,8 @@ const Home = () => {
 
       <h2>支援發布社群平台</h2>
       <div className="social-software">
-        <i className="fab fa-discord"></i>
-        <i className="fab fa-twitter-square"></i>
+        <a className="fab fa-discord" href={links.discord}></a>
+        <a className="fab fa-twitter-square" href={links.twitter}></a>
       </div>
 
     </div>
