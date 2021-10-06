@@ -11,17 +11,17 @@ const Menu = () => {
         </Link>
       </li>
       <li>
-        <Link to="/">
+        <Link to="/submit">
           投稿
         </Link>
       </li>
       <li>
-        <Link to="/">
+        <Link to="/review">
           審核
         </Link>
       </li>
       <li>
-        <Link to="/">
+        <Link to="/posts">
           文章
         </Link>
       </li>

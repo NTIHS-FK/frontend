@@ -1,2 +1,22 @@
-#home
+@keyframes typing
+  0%
+    width: 0
+@keyframes caret
+  50%
+    border-color: transparent
+
   
+#home
+  padding: 20px
+  color: #404040
+
+
+#title
+  display: flex
+  justify-content: center
+  h1
+    width: 6em
+    height: 1.5em
+    border-right: .05em solid
+    overflow: hidden
+    animation: typing 3s steps(6) infinite, caret 0.8s steps(1) infinite
