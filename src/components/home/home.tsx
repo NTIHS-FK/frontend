@@ -21,12 +21,16 @@ const Home = () => {
         所以就跑來自幹一個靠北網頁。
       </p>
 
-      <h2>支援發布社群平台</h2>
+      <h2>目前支援發布社群平台</h2>
       <div className="social-software">
         <a className="fab fa-discord" href={links.discord}></a>
         <a className="fab fa-twitter-square" href={links.twitter}></a>
       </div>
 
+      <h2>審文機制</h2>
+      <p>
+
+      </p>
     </div>
   );
 };
