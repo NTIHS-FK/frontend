@@ -69,7 +69,13 @@ const Submit = () => {
             )}
           </div>
         </label>
-
+        <Button
+          variant="contained"
+          color="success"
+          style={{width: '100%', marginTop: '50px', fontSize: '20px'}}
+        >
+          發布
+        </Button>
       </div>
     </div>
   );
