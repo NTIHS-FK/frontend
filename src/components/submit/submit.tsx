@@ -1,12 +1,29 @@
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
+import {styled} from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import './submit.sass';
 
+const Input = styled('input')({
+  display: 'none',
+});
+
+
 const Submit = () => {
+  const [preview, setPreview] = useState('');
+
+  const imagePreview = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files;
+    if (file != null) {
+      setPreview(window.URL.createObjectURL(file[0]));
+    }
+  };
+
   return (
     <div id="submit">
       <div id="board-gauge">
-        <h1>版規</h1>
+        <h1>板規</h1>
         <Divider />
         <h3>
           一、發表文章時之注意事項
@@ -23,6 +40,36 @@ const Submit = () => {
         <p>
           1. 違反上述規定之文章或作者，版主可刪除文章
         </p>
+      </div>
+
+      <div id="post">
+        <TextField
+          id="post-text"
+          label="貼文內容"
+          multiline
+          rows={7}
+          style={{width: '100%'}}
+        />
+        <label htmlFor="contained-button-file" >
+          <Input
+            accept="image/*"
+            id="contained-button-file"
+            multiple type="file"
+            onChange={imagePreview}
+          />
+          <div id="image-preview">
+            {preview === '' ? (
+              <h2>點我上傳</h2>
+            ) : (
+              <div>
+                <img src={preview} />
+                <Divider />
+                <p style={{marginTop: '20px'}}>點選我換別張圖</p>
+              </div>
+            )}
+          </div>
+        </label>
+
       </div>
     </div>
   );
