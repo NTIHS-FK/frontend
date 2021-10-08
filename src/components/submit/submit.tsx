@@ -8,12 +8,21 @@ import Snackbar from '@mui/material/Snackbar';
 import BoardGauge from './boardGauge/boardGauge';
 import {SnackbarMessage} from './snackbar';
 import './submit.sass';
-import {api} from '../../api';
+import {api} from '../../api/api';
+import {ErrorData} from '../../api/data/apiErrorData';
 import Logger from 'js-logger';
-
+import {AxiosError} from 'axios';
+import MuiAlert, {AlertProps} from '@mui/material/Alert';
 
 const Input = styled('input')({
   display: 'none',
+});
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref,
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const Submit = () => {
@@ -61,9 +70,27 @@ const Submit = () => {
       )
           .then((data) => {
             Logger.log(data.data);
+            setSnackbar(
+                {
+                  open: true,
+                  content: <Alert severity="success">發表成功</Alert>,
+                },
+            );
           })
-          .catch((error) => {
-            Logger.error(error);
+          .catch((error:AxiosError) => {
+            const errorData = error.response!!.data as ErrorData;
+            Logger.error(errorData);
+            setSnackbar(
+                {
+                  open: true,
+                  content: <Alert
+                    severity="error"
+                    sx={{width: '100%'}}
+                  >
+                    {errorData.message}
+                  </Alert>,
+                },
+            );
           });
     } else {
       setSnackbar({open: true, message: '沒有輸入文字喔'});
@@ -119,7 +146,9 @@ const Submit = () => {
         }}
         message={snackbar.message}
         anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
-      />
+      >
+        {snackbar.content}
+      </Snackbar>
     </div>
   );
 };
