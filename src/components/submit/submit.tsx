@@ -28,7 +28,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 const Submit = () => {
   const [preview, setPreview] = useState('');
   const [snackbar, setSnackbar] =
-      useState<SnackbarMessage>({open: false, message: ''});
+      useState<SnackbarMessage>({open: false});
 
   const imagePreview = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files;
@@ -93,7 +93,12 @@ const Submit = () => {
             );
           });
     } else {
-      setSnackbar({open: true, message: '沒有輸入文字喔'});
+      setSnackbar(
+          {
+            open: true,
+            content: <Alert severity="warning">沒有輸入文字喔</Alert>,
+          },
+      );
     }
   };
 
@@ -118,7 +123,7 @@ const Submit = () => {
           />
           <div id="image-preview">
             {preview === '' ? (
-              <h2>點我上傳</h2>
+              <h2>點我選擇圖片上傳</h2>
             ) : (
               <div>
                 <img src={preview} />
@@ -142,9 +147,8 @@ const Submit = () => {
         open={snackbar.open}
         autoHideDuration={6000}
         onClose={() => {
-          setSnackbar({open: false, message: ''});
+          setSnackbar({open: false});
         }}
-        message={snackbar.message}
         anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
       >
         {snackbar.content}
