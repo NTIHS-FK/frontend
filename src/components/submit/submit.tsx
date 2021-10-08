@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
+import FormData from 'form-data';
 import {styled} from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
@@ -7,6 +8,8 @@ import Snackbar from '@mui/material/Snackbar';
 import BoardGauge from './boardGauge/boardGauge';
 import {SnackbarMessage} from './snackbar';
 import './submit.sass';
+import {api} from '../../api';
+import Logger from 'js-logger';
 
 
 const Input = styled('input')({
@@ -24,19 +27,44 @@ const Submit = () => {
       setPreview(window.URL.createObjectURL(file[0]));
     }
   };
+
+  const progress = (event: ProgressEvent) => {
+    console.log(Math.round((100 * event.loaded) / event.total));
+  };
   // 發文啦哈哈
   const post = () => {
     const text =
         document.getElementById('post-text') as HTMLInputElement;
     const image =
         document.getElementById('psot-image') as HTMLInputElement;
+    const formData = new FormData();
 
     if (text.value !== '') {
       // 這裡要呼叫API啦
-      (text.value);
+      const textContent = text.value;
+      let imageContent: File | null = null;
+
+      formData.append('text', textContent);
+
       if (image.files !== null) {
-        (image.files[0]);
+        imageContent = image.files[0];
+        formData.append('image', imageContent);
       }
+
+      api.post(
+          '/post',
+          formData,
+          {
+            headers: {'content-type': 'multipart/form-data'},
+            onUploadProgress: progress,
+          },
+      )
+          .then((data) => {
+            Logger.log(data.data);
+          })
+          .catch((error) => {
+            Logger.error(error);
+          });
     } else {
       setSnackbar({open: true, message: '沒有輸入文字喔'});
     }

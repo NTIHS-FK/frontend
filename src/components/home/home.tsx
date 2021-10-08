@@ -8,7 +8,7 @@ const Home = () => {
 
       <div id="title">
         <h1>
-          靠北南工+
+          靠北南工 +
         </h1>
       </div>
 

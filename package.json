@@ -12,6 +12,8 @@
     "@material-ui/core": "^5.0.0-beta.5",
     "@mui/material": "^5.0.2",
     "axios": "^0.22.0",
+    "form-data": "^4.0.0",
+    "js-logger": "^1.6.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-router-dom": "^5.3.0",
@@ -27,8 +29,6 @@
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.26.1",
-    "i": "^0.3.7",
-    "npm": "^7.24.2",
     "typescript": "^4.4.3",
     "vite": "^2.6.0"
   }

@@ -1,3 +1,4 @@
+import Logger from 'js-logger';
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -9,6 +10,7 @@ import Menu from './components/menu/menu';
 import Submit from './components/submit/submit';
 
 const App = () => {
+  Logger.useDefaults();
   return (
     <Router>
       <Menu />
