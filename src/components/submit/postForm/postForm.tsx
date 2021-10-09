@@ -9,6 +9,7 @@ import Snackbar from '@mui/material/Snackbar';
 import FormData from 'form-data';
 import Logger from 'js-logger';
 import MuiAlert, {AlertProps} from '@mui/material/Alert';
+import CircularProgressWithLabel from './CircularProgressWithLabel';
 import {styled} from '@mui/material/styles';
 import {AxiosError} from 'axios';
 
@@ -27,6 +28,7 @@ const PostForm = () => {
   const [preview, setPreview] = useState('');
   const [snackbar, setSnackbar] =
     useState<SnackbarMessage>({open: false});
+  const [percentageOfProgress, setPercentageOfProgress] = useState(0);
 
   const imagePreview = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files;
@@ -36,11 +38,11 @@ const PostForm = () => {
   };
 
   const progress = (event: ProgressEvent) => {
-    console.log(Math.round((100 * event.loaded) / event.total));
+    setPercentageOfProgress(Math.round((100 * event.loaded) / event.total));
   };
 
   // 發文啦哈哈
-  const post = () => {
+  const post = async () => {
     const text =
       document.getElementById('post-text') as HTMLInputElement;
     const image =
@@ -58,39 +60,52 @@ const PostForm = () => {
         imageContent = image.files[0];
         formData.append('image', imageContent);
       }
-
-      api.post(
-          '/post',
-          formData,
+      // 開始的提示
+      setSnackbar(
           {
-            headers: {'content-type': 'multipart/form-data'},
-            onUploadProgress: progress,
+            open: true,
+            message: '發布中',
+            action: <CircularProgressWithLabel value={percentageOfProgress} />,
           },
-      )
-          .then((data) => {
-            Logger.log(data.data);
-            setSnackbar(
-                {
-                  open: true,
-                  content: <Alert severity="success">發表成功</Alert>,
-                },
-            );
-          })
-          .catch((error: AxiosError) => {
-            const errorData = error.response!!.data as ErrorData;
-            Logger.error(errorData);
-            setSnackbar(
-                {
-                  open: true,
-                  content: <Alert
-                    severity="error"
-                    sx={{width: '100%'}}
-                  >
-                    {errorData.message}
-                  </Alert>,
-                },
-            );
-          });
+      );
+
+      try {
+        const postRespond = await api.post(
+            '/post',
+            formData,
+            {
+              headers: {'content-type': 'multipart/form-data'},
+              onUploadProgress: progress,
+            },
+        );
+
+        setPercentageOfProgress(0);
+        setSnackbar(
+            {
+              open: true,
+              content: <Alert severity="success">發表成功</Alert>,
+            },
+        );
+
+        Logger.log(postRespond.data);
+      } catch (error) {
+        const errorData = (error as AxiosError).response!!.data as ErrorData;
+
+        setPercentageOfProgress(0);
+        setSnackbar(
+            {
+              open: true,
+              content: <Alert
+                severity="error"
+                sx={{width: '100%'}}
+              >
+                {errorData.message}
+              </Alert>,
+            },
+        );
+
+        Logger.error(errorData);
+      }
     } else {
       setSnackbar(
           {
@@ -147,6 +162,8 @@ const PostForm = () => {
           setSnackbar({open: false, content: snackbar.content});
         }}
         anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+        action={snackbar.action}
+        message={snackbar.message}
       >
         {snackbar.content}
       </Snackbar>

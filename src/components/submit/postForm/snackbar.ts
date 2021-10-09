@@ -1,4 +1,6 @@
 export interface SnackbarMessage {
   open: boolean,
-  content?: JSX.Element
+  content?: JSX.Element,
+  action?: JSX.Element,
+  message?: string
 }
