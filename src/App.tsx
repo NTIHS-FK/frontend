@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import Home from './components/home';
 import Menu from './components/menu';
+import Posts from './components/posts';
 import Submit from './components/submit';
 
 const App = () => {
@@ -20,6 +21,9 @@ const App = () => {
         </Route>
         <Route exact path="/submit">
           <Submit />
+        </Route>
+        <Route exact path="/posts">
+          <Posts />
         </Route>
       </Switch>
     </Router>
