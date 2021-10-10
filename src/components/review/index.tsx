@@ -13,8 +13,8 @@ const Posts = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await api.get('./votes');
-      const responseData = response.data as APIData<Array<Post>>;
+      const response = await api.get<APIData<Array<Post>>>('./votes');
+      const responseData = response.data;
       setPosts(responseData.data);
     })();
   }, []);
@@ -28,7 +28,7 @@ const Posts = () => {
               src={`http://127.0.0.1:8080/${item.textImage}.jpg`}
             />
             <ImageListItemBar
-              subtitle={<VoteButton />}
+              subtitle={<VoteButton id={item.id}/>}
               position="below"
             />
           </ImageListItem>
