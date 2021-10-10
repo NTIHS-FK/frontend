@@ -38,6 +38,7 @@ const PostForm = () => {
   };
 
   const progress = (event: ProgressEvent) => {
+    console.log(Math.round((100 * event.loaded) / event.total));
     setPercentageOfProgress(Math.round((100 * event.loaded) / event.total));
   };
 
@@ -68,7 +69,7 @@ const PostForm = () => {
             action: <CircularProgressWithLabel value={percentageOfProgress} />,
           },
       );
-
+      // API
       try {
         const postRespond = await api.post(
             '/post',
@@ -79,7 +80,6 @@ const PostForm = () => {
             },
         );
 
-        setPercentageOfProgress(0);
         setSnackbar(
             {
               open: true,
@@ -91,7 +91,6 @@ const PostForm = () => {
       } catch (error) {
         const errorData = (error as AxiosError).response!!.data as ErrorData;
 
-        setPercentageOfProgress(0);
         setSnackbar(
             {
               open: true,
@@ -105,6 +104,8 @@ const PostForm = () => {
         );
 
         Logger.error(errorData);
+      } finally {
+        setPercentageOfProgress(0);
       }
     } else {
       setSnackbar(
@@ -159,7 +160,7 @@ const PostForm = () => {
         open={snackbar.open}
         autoHideDuration={6000}
         onClose={() => {
-          setSnackbar({open: false, content: snackbar.content});
+          setSnackbar({open: false, content: snackbar.content, message: ''});
         }}
         anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
         action={snackbar.action}

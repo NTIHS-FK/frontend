@@ -5,9 +5,9 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import Home from './components/home/home';
-import Menu from './components/menu/menu';
-import Submit from './components/submit/submit';
+import Home from './components/home';
+import Menu from './components/menu';
+import Submit from './components/submit';
 
 const App = () => {
   Logger.useDefaults();

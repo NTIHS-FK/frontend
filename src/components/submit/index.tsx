@@ -1,6 +1,6 @@
 import React from 'react';
-import BoardGauge from './boardGauge/boardGauge';
-import PostForm from './postForm/postForm';
+import BoardGauge from './boardGauge';
+import PostForm from './postForm';
 import './submit.sass';
 
 const Submit = () => {
