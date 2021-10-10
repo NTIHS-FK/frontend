@@ -13,7 +13,7 @@ const Posts = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await api.get('./posts');
+      const response = await api.get('./votes');
       const responseData = response.data as APIData<Array<Post>>;
       setPosts(responseData.data);
     })();
