@@ -3,9 +3,8 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import VoteButton from './voteButton';
-import {APIData} from '../../api/data/apiData';
 import {Post} from './type';
-import {api} from '../../api/api';
+import {api, APIData} from '../../api/api';
 import './posts.sass';
 
 const Posts = () => {

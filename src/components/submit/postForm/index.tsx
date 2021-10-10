@@ -9,8 +9,7 @@ import {styled} from '@mui/material/styles';
 import MuiAlert, {AlertProps} from '@mui/material/Alert';
 import CircularProgressWithLabel from './CircularProgressWithLabel';
 import {AxiosError} from 'axios';
-import {api} from '../../../api/api';
-import {ErrorData} from '../../../api/data/apiErrorData';
+import {api, ErrorData} from '../../../api/api';
 import {SnackbarMessage} from './snackbar';
 
 const Input = styled('input')({
