@@ -1,15 +1,17 @@
-import React, {FC} from 'react';
+import React, {FC, useContext} from 'react';
 import Button from '@mui/material/Button';
 import {authAPI} from '../../../api/api';
 import {ErrorData} from '../../../api/data/apiErrorData';
+import {Token} from '../../../context/token';
 import './voteButtons.sass';
 
 const VoteButton: FC<{id: number}> = ({id}) => {
+  const token = useContext(Token);
   const voteAPI = (vote: boolean = false) => {
     return () => {
       (async () => {
-        const response = await authAPI<ErrorData>('', 'post', `/vote/${id}`);
-        const responseData = response.data;
+        const response = await authAPI<ErrorData>(token, 'post', `/vote/${id}`);
+        response.data;
       })();
     };
   };
