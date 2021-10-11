@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import Button from '@mui/material/Button';
+import Login from './loginButton';
 import './menu.sass';
 
 const Menu = () => {
@@ -27,12 +27,7 @@ const Menu = () => {
         </Link>
       </li>
       <li id="login-button">
-        <Button
-          href="#text-buttons"
-          variant="contained"
-        >
-          登入
-        </Button>
+        <Login />
       </li>
     </ul>
   );
