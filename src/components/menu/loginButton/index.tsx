@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Button from '@mui/material/Button';
+import {Token} from '../../../context/token';
 
 const Login = () => {
+  const token = useContext(Token);
+
   return (
     <Button
       href="#text-buttons"
       variant="contained"
     >
-      登入
+      {token ? '登出' : '登入'}
     </Button>
   );
 };
