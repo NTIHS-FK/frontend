@@ -11,8 +11,11 @@ const Login = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await authAPI<APIData<UserInfo>>(token, 'get', '/user');
-      setUserInfo(response.data.data);
+      if (token !== '') {
+        const response =
+            await authAPI<APIData<UserInfo>>(token, 'get', '/user');
+        setUserInfo(response.data.data);
+      }
     })();
   }, [token]);
 
