@@ -9,6 +9,7 @@ import Home from './components/home';
 import Menu from './components/menu';
 import Review from './components/review';
 import Submit from './components/submit';
+import Page404 from './components/page404';
 import {Token} from './context/token';
 import {api, ErrorData, APIData} from './api/api';
 
@@ -29,16 +30,23 @@ const App = () => {
   return (
     <Router>
       <Token.Provider value={token}>
-        <Menu />
         <Switch>
-          <Route exact path="/">
-            <Home />
+          <Route exact path="/404" >
+            <Page404 />
           </Route>
-          <Route exact path="/submit">
-            <Submit />
-          </Route>
-          <Route exact path="/review">
-            <Review />
+          <Route path="/">
+            <Menu />
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/submit">
+                <Submit />
+              </Route>
+              <Route exact path="/review">
+                <Review />
+              </Route>
+            </Switch>
           </Route>
         </Switch>
       </Token.Provider>
