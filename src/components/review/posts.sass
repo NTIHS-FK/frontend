@@ -1,8 +1,22 @@
 #posts
-  width: 900px
-  margin: 50px auto
+  margin: 0 auto
+  padding: 20px
+  padding-top: 100px
+  max-width: 950px
   img
-    width: 448px
+    width: 300px
+
+@media screen and ( max-width: 660px )
+  #posts
+    max-width: 300px
+    & > ul
+      column-count: 1 !important
+
+@media screen and ( max-width: 1000px ) and ( min-width: 660px)
+  #posts
+    max-width: 650px
+    & > ul
+      column-count: 2 !important
 
 .images
   background-color: #555555e5

@@ -20,7 +20,7 @@ const Posts = () => {
 
   return (
     <div id="posts">
-      <ImageList variant="masonry" cols={2} gap={5}>
+      <ImageList variant="masonry" cols={3} gap={5}>
         {posts.map((item) => (
           <ImageListItem key={item.id} className="images">
             <img
