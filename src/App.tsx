@@ -32,9 +32,7 @@ const App = () => {
     <Router>
       <Token.Provider value={token}>
         <Switch>
-          <Route exact path="/404" >
-            <Page404 />
-          </Route>
+
           <Route exact path="/login">
             <Login />
           </Route>
@@ -49,6 +47,9 @@ const App = () => {
               </Route>
               <Route exact path="/review">
                 <Review />
+              </Route>
+              <Route exact path="*" >
+                <Page404 />
               </Route>
             </Switch>
           </Route>

@@ -25,7 +25,7 @@ const Login = () => {
       </Avatar>
     ) : (
       <Button
-        href="#text-buttons"
+        href="/login"
         variant="contained"
       >
         登入
