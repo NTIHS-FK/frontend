@@ -3,7 +3,9 @@ import './page404.sass';
 
 const Page404 = () => {
   return (
-    <div>404</div>
+    <div id="page-404">
+
+    </div>
   );
 };
 

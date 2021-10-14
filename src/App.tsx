@@ -10,6 +10,7 @@ import Menu from './components/menu';
 import Review from './components/review';
 import Submit from './components/submit';
 import Page404 from './components/page404';
+import Login from './components/login';
 import {Token} from './context/token';
 import {api, ErrorData, APIData} from './api/api';
 
@@ -33,6 +34,9 @@ const App = () => {
         <Switch>
           <Route exact path="/404" >
             <Page404 />
+          </Route>
+          <Route exact path="/login">
+            <Login />
           </Route>
           <Route path="/">
             <Menu />
