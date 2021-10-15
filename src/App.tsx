@@ -32,7 +32,6 @@ const App = () => {
     <Router>
       <Token.Provider value={token}>
         <Switch>
-
           <Route exact path="/login">
             <Login />
           </Route>
