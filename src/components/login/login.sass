@@ -7,7 +7,7 @@
   #login-header, #login-footer
     flex: 1
   #login-form-div
-    height: 400px
+    height: 450px
     display: flex
     justify-content: flex-end
     margin-right: 100px
@@ -16,6 +16,7 @@
       margin-right: 0
 
 #login-form
+  max-width: 300px
   box-shadow: rgb(0 0 0 / 30%) 0px 15px 25px
   background-color: #ffff
   border-radius: 20px
@@ -23,6 +24,7 @@
   display: flex
   position: relative
   flex-direction: column
+  transition: all 0.5s
   h3
     text-align: center
     color: #008bfd
@@ -30,9 +32,18 @@
   & > *
     margin-bottom: 10px
   & > button
-    margin-top: 140px
+    margin-top: 50px
+  &:hover
+    transform: scale(1.05)
     
-
+#other-login-button
+  margin-top: 30px
+  display: flex
+  justify-content: space-around
+  flex-wrap: wrap
+  width: 100%
+  & > button
+    margin: 5px 0
 
 
 

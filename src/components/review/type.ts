@@ -3,4 +3,4 @@ export interface Post {
   time: number,
   textImage: string,
   voting: boolean
-};
+}

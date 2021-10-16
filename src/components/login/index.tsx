@@ -1,8 +1,11 @@
 import React, {useState, ChangeEvent} from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {api} from '../../api/api';
+import {Twitter, GitHub} from '@material-ui/icons';
 import {InputError, UserFormData} from './type';
+import LoginButton from './loginButton';
+import {api} from '../../api/api';
+import Discord from './svgs/Discord-Logo-White.svg';
 import './login.sass';
 
 const Login = () => {
@@ -20,6 +23,7 @@ const Login = () => {
   const changeValue = (value: string) => {
     return (event: ChangeEvent) => {
       const inputTag = event.target as HTMLInputElement;
+
       setFormData({
         usernameOrEmail: value === 'usernameOrEmail' ?
             inputTag.value : formData.usernameOrEmail,
@@ -30,7 +34,9 @@ const Login = () => {
 
   return (
     <div id="login">
-      <div id="login-header"></div>
+      <div id="login-header">
+        靠北南工＋
+      </div>
       <div id="login-form-div">
         <div id="login-form">
           <h3>登入</h3>
@@ -54,6 +60,26 @@ const Login = () => {
           >
             登入
           </Button>
+          <div id="other-login-button">
+            <LoginButton
+              icon={<GitHub />}
+              title="GitHub登入"
+              backgroundColor="rgb(0, 0, 0)"
+              color="#ffff"
+            />
+            <LoginButton
+              icon={<Twitter />}
+              title="Twitter登入"
+              backgroundColor="#2795e9"
+              color="#ffff"
+            />
+            <LoginButton
+              icon={Discord}
+              title="Discord登入"
+              backgroundColor=""
+              color="#ffff"
+            />
+          </div>
         </div>
       </div>
       <div id="login-footer"></div>
