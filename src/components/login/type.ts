@@ -8,3 +8,12 @@ export interface UserFormData {
   usernameOrEmail: string;
   password: string;
 }
+
+export interface Token {
+  token: string;
+}
+
+export interface LoginFormData {
+  nameOrEmail: string;
+  password: string;
+}

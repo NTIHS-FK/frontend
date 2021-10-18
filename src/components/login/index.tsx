@@ -2,28 +2,54 @@ import React, {useState, ChangeEvent} from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {Twitter, GitHub, Google} from '@material-ui/icons';
-import {InputError, UserFormData} from './type';
+import {UserFormData, Token, LoginFormData, InputError} from './type';
 import LoginButton from './loginButton';
-import {api} from '../../api/api';
+import {api, APIData} from '../../api/api';
 import Discord from './svgs/Discord-Logo-White.svg';
+import {AxiosError} from 'axios';
 import './login.sass';
 
 const Login = () => {
-  const [inputError, setInputError] =
-      useState<InputError>({name: false, password: false, email: false});
   const [formData, setFormData] =
       useState<UserFormData>({usernameOrEmail: '', password: ''});
-
+  const [inputError, setInputError] = useState<InputError>();
   const loginAPI = () => {
     (async () => {
-      const response = await api.post('/api/login');
+      try {
+        await api.post<LoginFormData>(
+            'login/api/login',
+            {
+              nameOrEmail: formData.usernameOrEmail,
+              password: formData.password,
+            },
+        );
+      } catch (error) {
+        const errorMessage =
+            (error as AxiosError<APIData<Token>>).response?.data.message;
+        let password = false;
+        let email = false;
+
+        if (errorMessage === 'password error') {
+          password = true;
+        } else email = true;
+
+        setInputError({
+          name: email,
+          email: email,
+          password: password,
+        });
+      }
     })();
   };
 
   const changeValue = (value: string) => {
     return (event: ChangeEvent) => {
       const inputTag = event.target as HTMLInputElement;
-
+      setInputError({
+        email: value === 'usernameOrEmail',
+        password: value === 'password',
+        name: false,
+      });
       setFormData({
         usernameOrEmail: value === 'usernameOrEmail' ?
             inputTag.value : formData.usernameOrEmail,
@@ -45,6 +71,7 @@ const Login = () => {
             variant="standard"
             sx={{width: '300px'}}
             onChange={changeValue('usernameOrEmail')}
+            error={inputError?.email}
           />
           <TextField
             label="Password"
@@ -52,6 +79,7 @@ const Login = () => {
             sx={{width: '300px'}}
             inputProps={{type: 'password'}}
             onChange={changeValue('password')}
+            error={inputError?.password}
           />
           <Button
             variant="contained"
