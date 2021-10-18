@@ -1,7 +1,7 @@
 export interface LoginButtonProps {
-  icon: JSX.IntrinsicAttributes | string,
-  color: string,
-  backgroundColor: string,
-  title: string,
-  url: string
+  icon: JSX.IntrinsicAttributes | string;
+  color: string;
+  backgroundColor: string;
+  title: string;
+  url: string;
 }

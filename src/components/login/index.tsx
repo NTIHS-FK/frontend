@@ -1,7 +1,7 @@
 import React, {useState, ChangeEvent} from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {Twitter, GitHub} from '@material-ui/icons';
+import {Twitter, GitHub, Google} from '@material-ui/icons';
 import {InputError, UserFormData} from './type';
 import LoginButton from './loginButton';
 import {api} from '../../api/api';
@@ -66,18 +66,28 @@ const Login = () => {
               title="GitHub登入"
               backgroundColor="rgb(0, 0, 0)"
               color="#ffff"
+              url="/auth/github"
             />
             <LoginButton
               icon={<Twitter />}
               title="Twitter登入"
               backgroundColor="#2795e9"
               color="#ffff"
+              url="/auth/twitter"
             />
             <LoginButton
               icon={Discord}
               title="Discord登入"
               backgroundColor=""
               color="#ffff"
+              url="/auth/discord"
+            />
+            <LoginButton
+              icon={<Google />}
+              title="Google登入"
+              backgroundColor=""
+              color="#ffff"
+              url="/auth/google"
             />
           </div>
         </div>

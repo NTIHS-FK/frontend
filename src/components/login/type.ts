@@ -1,10 +1,10 @@
 export interface InputError {
-  name: boolean,
-  email: boolean,
-  password: boolean
+  name: boolean;
+  email: boolean;
+  password: boolean;
 }
 
 export interface UserFormData {
-  usernameOrEmail: string,
-  password: string
+  usernameOrEmail: string;
+  password: string;
 }
