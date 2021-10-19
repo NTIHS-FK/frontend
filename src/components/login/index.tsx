@@ -114,8 +114,8 @@ const Login = () => {
             <LoginButton
               icon={Google}
               title="Google登入"
-              backgroundColor=""
-              color="#ffff"
+              backgroundColor="#fff"
+              color="#757575"
               url="/auth/google"
             />
           </div>
