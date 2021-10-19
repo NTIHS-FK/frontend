@@ -1,11 +1,12 @@
 import React, {useState, ChangeEvent} from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {Twitter, GitHub, Google} from '@material-ui/icons';
+import {Twitter, GitHub} from '@material-ui/icons';
 import {UserFormData, Token, LoginFormData, InputError} from './type';
 import LoginButton from './loginButton';
 import {api, APIData} from '../../api/api';
 import Discord from './svgs/Discord-Logo-White.svg';
+import Google from './svgs/Google__G__Logo.svg';
 import {AxiosError} from 'axios';
 import './login.sass';
 
@@ -111,7 +112,7 @@ const Login = () => {
               url="/auth/discord"
             />
             <LoginButton
-              icon={<Google />}
+              icon={Google}
               title="Google登入"
               backgroundColor=""
               color="#ffff"
