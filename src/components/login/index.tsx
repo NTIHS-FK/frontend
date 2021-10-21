@@ -2,18 +2,19 @@ import React, {useState, ChangeEvent} from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {Twitter, GitHub} from '@material-ui/icons';
-import {UserFormData, Token, LoginFormData, InputError} from './type';
 import LoginButton from './loginButton';
-import {api, APIData} from '../../api/api';
-import Discord from './svgs/Discord-Logo-White.svg';
-import Google from './svgs/Google__G__Logo.svg';
 import {AxiosError} from 'axios';
+import {api, APIData} from '../../api/api';
+import {UserFormData, Token, LoginFormData, InputError} from './type';
+import Google from './svgs/Google__G__Logo.svg';
+import Discord from './svgs/Discord-Logo-White.svg';
 import './login.sass';
 
 const Login = () => {
   const [formData, setFormData] =
       useState<UserFormData>({usernameOrEmail: '', password: ''});
-  const [inputError, setInputError] = useState<InputError>();
+  const [inputError, setInputError] =
+      useState<InputError>({name: false, password: false, email: false});
   const loginAPI = () => {
     (async () => {
       try {
@@ -46,9 +47,15 @@ const Login = () => {
   const changeValue = (value: string) => {
     return (event: ChangeEvent) => {
       const inputTag = event.target as HTMLInputElement;
+      let passwordError = inputError.password;
+      let emailError = inputError.email;
+
+      if (value === 'password') passwordError = false;
+      else emailError = false;
+
       setInputError({
-        email: value === 'usernameOrEmail',
-        password: value === 'password',
+        email: emailError,
+        password: passwordError,
         name: false,
       });
       setFormData({
