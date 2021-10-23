@@ -10,7 +10,7 @@ import Menu from './components/menu';
 import Review from './components/review';
 import Submit from './components/submit';
 import Page404 from './components/page404';
-import Login from './components/login';
+import Form from './components/form';
 import {Token} from './context/token';
 import {api, API} from './api/api';
 
@@ -33,7 +33,10 @@ const App = () => {
       <Token.Provider value={token}>
         <Switch>
           <Route exact path="/login">
-            <Login />
+            <Form />
+          </Route>
+          <Route exact path="/sign-up">
+            <Form />
           </Route>
           <Route path="/">
             <Menu />
