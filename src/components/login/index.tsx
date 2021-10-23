@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import {Twitter, GitHub} from '@material-ui/icons';
 import LoginButton from './loginButton';
 import {AxiosError} from 'axios';
-import {api, APIData} from '../../api/api';
+import {api, API} from '../../api/api';
 import {UserFormData, Token, LoginFormData, InputError} from './type';
 import Google from './svgs/Google__G__Logo.svg';
 import Discord from './svgs/Discord-Logo-White.svg';
@@ -27,7 +27,7 @@ const Login = () => {
         );
       } catch (error) {
         const errorMessage =
-            (error as AxiosError<APIData<Token>>).response?.data.message;
+            (error as AxiosError<API<Token>>).response?.data.message;
         let password = false;
         let email = false;
 
