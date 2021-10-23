@@ -1,6 +1,7 @@
 import React, {useState, ChangeEvent} from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Particles from 'react-tsparticles';
 import {Twitter, GitHub} from '@material-ui/icons';
 import LoginButton from './loginButton';
 import {AxiosError} from 'axios';
@@ -129,6 +130,7 @@ const Login = () => {
         </div>
       </div>
       <div id="login-footer"></div>
+      <Particles id="tsparticles" url="particles.json"/>
     </div>
   );
 };
