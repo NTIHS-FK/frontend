@@ -70,7 +70,11 @@ const Login = () => {
   return (
     <div id="login">
       <div id="login-header">
-        靠北南工＋
+        <h1 id="home-link">
+          <a href="/">
+            靠北南工+
+          </a>
+        </h1>
       </div>
       <div id="login-form-div">
         <div id="login-form">
