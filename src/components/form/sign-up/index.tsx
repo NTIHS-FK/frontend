@@ -14,6 +14,7 @@ const SignUp = () => {
   const changeValue = (key: string) => {
     return (event: ChangeEvent) => {
       const value = (event.target as HTMLInputElement).value;
+
       setFormData({
         name: key === 'name' ? value : formData.name,
         email: key === 'email' ? value : formData.email,
