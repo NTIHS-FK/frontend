@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useState} from 'react';
 import {AxiosError} from 'axios';
 import TextField from '@mui/material/TextField';
+import Button from '@material-ui/core/Button';
 import {api, API} from '../../../api/api';
 import {SignUpType} from './type';
 import './signUp.sass';
@@ -77,6 +78,15 @@ const SignUp = () => {
         onChange={changeValue('confirm')}
         error={formData.password !== formData.confirm}
       />
+      <Button
+        onClick={() => {
+          if (formData.password === formData.confirm) {
+            signUpAPI();
+          }
+        }}
+      >
+        註冊
+      </Button>
     </div>
   );
 };
