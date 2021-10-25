@@ -1,7 +1,10 @@
 import React, {ChangeEvent, useState} from 'react';
+import {AxiosError} from 'axios';
 import TextField from '@mui/material/TextField';
+import {api, API} from '../../../api/api';
 import {SignUpType} from './type';
 import './signUp.sass';
+import Logger from 'js-logger';
 
 const SignUp = () => {
   const [formData, setFormData] = useState<SignUpType>({
@@ -22,6 +25,26 @@ const SignUp = () => {
         confirm: key === 'confirm' ? value : formData.confirm,
       });
     };
+  };
+
+  const signUpAPI = () => {
+    const name = formData.name;
+    const email = formData.email;
+    const password = formData.password;
+
+    (async () => {
+      try {
+        await api.post<{}, API>('/sign-up', {
+          email: email,
+          name: name,
+          password: password,
+        });
+      } catch (error) {
+        const errroMessage =
+            (error as AxiosError<API>).response?.data.message;
+        Logger.error(errroMessage);
+      }
+    })();
   };
 
   return (
