@@ -28,12 +28,12 @@ const Login = () => {
             },
         );
       } catch (error) {
+        let password = false;
+        let email = false;
         const errorMessage =
             (error as AxiosError<API<Token>>).response?.data.message;
 
         Logger.error(errorMessage, error);
-        let password = false;
-        let email = false;
 
         if (errorMessage === 'password error') {
           password = true;
