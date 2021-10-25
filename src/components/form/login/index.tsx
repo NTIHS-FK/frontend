@@ -17,6 +17,7 @@ const Login = () => {
       useState<UserFormData>({usernameOrEmail: '', password: ''});
   const [inputError, setInputError] =
       useState<InputError>({name: false, password: false, email: false});
+
   const loginAPI = () => {
     (async () => {
       try {

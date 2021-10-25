@@ -79,6 +79,8 @@ const SignUp = () => {
         error={formData.password !== formData.confirm}
       />
       <Button
+        variant="contained"
+        color="success"
         onClick={() => {
           if (formData.password === formData.confirm) {
             signUpAPI();
