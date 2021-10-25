@@ -1,5 +1,6 @@
 import React, {useState, ChangeEvent} from 'react';
 import {Link} from 'react-router-dom';
+import Logger from 'js-logger';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {Twitter, GitHub} from '@material-ui/icons';
@@ -29,6 +30,8 @@ const Login = () => {
       } catch (error) {
         const errorMessage =
             (error as AxiosError<API<Token>>).response?.data.message;
+
+        Logger.error(errorMessage, error);
         let password = false;
         let email = false;
 
