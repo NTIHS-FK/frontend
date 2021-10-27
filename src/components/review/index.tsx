@@ -12,9 +12,21 @@ const Posts = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await api.get<API<Array<Post>>>('./votes');
-      const responseData = response.data;
-      setPosts(responseData.data);
+      try {
+        const response = await api.get<API<Array<Post>>>('./votes');
+        const responseData = response.data;
+        setPosts(responseData.data);
+      } catch (error) {
+        // testing data
+        setPosts([
+          {
+            id: 1,
+            time: 1232123,
+            textImage: 'asdasd',
+            voting: false,
+          },
+        ]);
+      }
     })();
   }, []);
 
