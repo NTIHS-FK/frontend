@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
+import {Link} from 'react-router-dom';
 import {AxiosError} from 'axios';
 import TextField from '@mui/material/TextField';
 import Button from '@material-ui/core/Button';
@@ -89,6 +90,11 @@ const SignUp = () => {
       >
         註冊
       </Button>
+      <div style={{textAlign: 'center', marginTop: '30px'}}>
+        <Link to="/login">
+          登入
+        </Link>
+      </div>
     </div>
   );
 };
