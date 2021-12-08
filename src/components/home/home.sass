@@ -1,6 +1,9 @@
 @keyframes typing
   0%
     width: 0
+  40%
+    width: 5em
+
 @keyframes caret
   50%
     border-color: transparent
@@ -16,11 +19,12 @@
   display: flex
   justify-content: center
   h1
-    width: 6em
+    width: 5em
     height: 1.5em
     border-right: .05em solid
     overflow: hidden
-    animation: typing 3s steps(6) infinite, caret 0.8s steps(1) infinite
+    animation: typing 5s steps(5) infinite, caret 0.8s steps(1) infinite
+
 
 .social-software
   display: flex

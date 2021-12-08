@@ -18,6 +18,7 @@ const Login = () => {
   const loginAPI = () => {
     (async () => {
       try {
+        // call login api
         await api.post<LoginFormData>(
             'login/api/login',
             {
@@ -26,11 +27,12 @@ const Login = () => {
             },
         );
       } catch (error) {
+        // call api error
         const errorMessage =
             (error as AxiosError<APIData<Token>>).response?.data.message;
         let password = false;
         let email = false;
-
+        // 提示錯誤
         if (errorMessage === 'password error') {
           password = true;
         } else email = true;
@@ -43,7 +45,7 @@ const Login = () => {
       }
     })();
   };
-
+  // value change
   const changeValue = (value: string) => {
     return (event: ChangeEvent) => {
       const inputTag = event.target as HTMLInputElement;
