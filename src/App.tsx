@@ -10,9 +10,9 @@ import Menu from './components/menu';
 import Review from './components/review';
 import Submit from './components/submit';
 import Page404 from './components/page404';
-import Login from './components/login';
+import Form from './components/form';
 import {Token} from './context/token';
-import {api, ErrorData, APIData} from './api/api';
+import {api, API} from './api/api';
 
 const App = () => {
   Logger.useDefaults();
@@ -20,10 +20,10 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await api.post<ErrorData>('/login');
+      const response = await api.post<API>('/login');
 
       if (!response.data.error) {
-        setToken((response.data as APIData<string>).data);
+        setToken((response.data as API<string>).data);
       }
     })();
   }, []);
@@ -33,7 +33,10 @@ const App = () => {
       <Token.Provider value={token}>
         <Switch>
           <Route exact path="/login">
-            <Login />
+            <Form />
+          </Route>
+          <Route exact path="/sign-up">
+            <Form />
           </Route>
           <Route path="/">
             <Menu />

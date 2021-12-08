@@ -4,7 +4,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import VoteButton from './voteButton';
 import {Post} from './type';
-import {api, APIData} from '../../api/api';
+import {api, API} from '../../api/api';
 import './posts.sass';
 
 const Posts = () => {
@@ -12,9 +12,21 @@ const Posts = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await api.get<APIData<Array<Post>>>('./votes');
-      const responseData = response.data;
-      setPosts(responseData.data);
+      try {
+        const response = await api.get<API<Array<Post>>>('./votes');
+        const responseData = response.data;
+        setPosts(responseData.data);
+      } catch (error) {
+        // testing data
+        setPosts([
+          {
+            id: 1,
+            time: 1232123,
+            textImage: 'asdasd',
+            voting: false,
+          },
+        ]);
+      }
     })();
   }, []);
 

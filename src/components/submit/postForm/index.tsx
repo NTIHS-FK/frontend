@@ -9,7 +9,7 @@ import {styled} from '@mui/material/styles';
 import MuiAlert, {AlertProps} from '@mui/material/Alert';
 import CircularProgressWithLabel from './CircularProgressWithLabel';
 import {AxiosError} from 'axios';
-import {api, ErrorData} from '../../../api/api';
+import {api, API} from '../../../api/api';
 import {SnackbarMessage} from './snackbar';
 
 const Input = styled('input')({
@@ -70,7 +70,7 @@ const PostForm = () => {
       );
       // API
       try {
-        const postRespond = await api.post(
+        const postRespond = await api.post<{}, API>(
             '/post',
             formData,
             {
@@ -86,9 +86,9 @@ const PostForm = () => {
             },
         );
 
-        Logger.log(postRespond.data);
+        Logger.log(postRespond.error);
       } catch (error) {
-        const errorData = (error as AxiosError).response!!.data as ErrorData;
+        const errorData = (error as AxiosError).response!!.data as API;
 
         setSnackbar(
             {

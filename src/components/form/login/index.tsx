@@ -1,10 +1,12 @@
 import React, {useState, ChangeEvent} from 'react';
+import {Link} from 'react-router-dom';
+import Logger from 'js-logger';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {Twitter, GitHub} from '@material-ui/icons';
 import LoginButton from './loginButton';
 import {AxiosError} from 'axios';
-import {api, APIData} from '../../api/api';
+import {api, API} from '../../../api/api';
 import {UserFormData, Token, LoginFormData, InputError} from './type';
 import Google from './svgs/Google__G__Logo.svg';
 import Discord from './svgs/Discord-Logo-White.svg';
@@ -15,6 +17,7 @@ const Login = () => {
       useState<UserFormData>({usernameOrEmail: '', password: ''});
   const [inputError, setInputError] =
       useState<InputError>({name: false, password: false, email: false});
+
   const loginAPI = () => {
     (async () => {
       try {
@@ -27,12 +30,13 @@ const Login = () => {
             },
         );
       } catch (error) {
-        // call api error
-        const errorMessage =
-            (error as AxiosError<APIData<Token>>).response?.data.message;
         let password = false;
         let email = false;
-        // 提示錯誤
+        const errorMessage =
+            (error as AxiosError<API<Token>>).response?.data.message;
+
+        Logger.error(errorMessage, error);
+
         if (errorMessage === 'password error') {
           password = true;
         } else email = true;
@@ -69,68 +73,65 @@ const Login = () => {
   };
 
   return (
-    <div id="login">
-      <div id="login-header">
-        靠北南工＋
+    <div id="login-form">
+      <h3>登入</h3>
+      <TextField
+        label="Name or Email"
+        variant="standard"
+        sx={{width: '300px'}}
+        onChange={changeValue('usernameOrEmail')}
+        error={inputError?.email}
+      />
+      <TextField
+        label="Password"
+        variant="standard"
+        sx={{width: '300px'}}
+        inputProps={{type: 'password'}}
+        onChange={changeValue('password')}
+        error={inputError?.password}
+      />
+      <Button
+        variant="contained"
+        color="success"
+        onClick={loginAPI}
+      >
+        登入
+      </Button>
+      <div style={{textAlign: 'center', margin: '0'}}>
+        <Link to="/sign-up">
+          註冊
+        </Link>
       </div>
-      <div id="login-form-div">
-        <div id="login-form">
-          <h3>登入</h3>
-          <TextField
-            label="Name or Email"
-            variant="standard"
-            sx={{width: '300px'}}
-            onChange={changeValue('usernameOrEmail')}
-            error={inputError?.email}
-          />
-          <TextField
-            label="Password"
-            variant="standard"
-            sx={{width: '300px'}}
-            inputProps={{type: 'password'}}
-            onChange={changeValue('password')}
-            error={inputError?.password}
-          />
-          <Button
-            variant="contained"
-            color="success"
-            onClick={loginAPI}
-          >
-            登入
-          </Button>
-          <div id="other-login-button">
-            <LoginButton
-              icon={<GitHub />}
-              title="GitHub登入"
-              backgroundColor="rgb(0, 0, 0)"
-              color="#ffff"
-              url="/auth/github"
-            />
-            <LoginButton
-              icon={<Twitter />}
-              title="Twitter登入"
-              backgroundColor="#2795e9"
-              color="#ffff"
-              url="/auth/twitter"
-            />
-            <LoginButton
-              icon={Discord}
-              title="Discord登入"
-              backgroundColor=""
-              color="#ffff"
-              url="/auth/discord"
-            />
-            <LoginButton
-              icon={Google}
-              title="Google登入"
-              backgroundColor="#fff"
-              color="#757575"
-              url="/auth/google"
-            />
-          </div>
-        </div>
+      <div id="other-login-button">
+        <LoginButton
+          icon={<GitHub />}
+          title="GitHub登入"
+          backgroundColor="rgb(0, 0, 0)"
+          color="#ffff"
+          url="/auth/github"
+        />
+        <LoginButton
+          icon={<Twitter />}
+          title="Twitter登入"
+          backgroundColor="#2795e9"
+          color="#ffff"
+          url="/auth/twitter"
+        />
+        <LoginButton
+          icon={Discord}
+          title="Discord登入"
+          backgroundColor=""
+          color="#ffff"
+          url="/auth/discord"
+        />
+        <LoginButton
+          icon={Google}
+          title="Google登入"
+          backgroundColor="#fff"
+          color="#757575"
+          url="/auth/google"
+        />
       </div>
-      <div id="login-footer"></div>
     </div>
   );
 };

@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {Method} from 'axios';
+import {APIData} from './data/apiData';
+import {ErrorData} from './data/apiErrorData';
+
 
 export * from './data/apiData';
 export * from './data/apiErrorData';
@@ -20,3 +23,5 @@ export const authAPI = async <T> (
     headers: {Authorization: `Bearer ${token}`},
   });
 };
+
+export type API<T = null> = T extends null ? ErrorData : APIData<T>;
