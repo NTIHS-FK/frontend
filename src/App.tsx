@@ -51,7 +51,7 @@ const App = () => {
               <Route exact path="/review">
                 <Review />
               </Route>
-              <Route exact path="Posts">
+              <Route exact path="/posts">
                 <Posts />
               </Route>
               <Route exact path="*" >
