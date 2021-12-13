@@ -11,6 +11,7 @@ import Review from './components/review';
 import Submit from './components/submit';
 import Page404 from './components/page404';
 import Form from './components/form';
+import Posts from './components/posts';
 import {Token} from './context/token';
 import {api, API} from './api/api';
 
@@ -49,6 +50,9 @@ const App = () => {
               </Route>
               <Route exact path="/review">
                 <Review />
+              </Route>
+              <Route exact path="Posts">
+                <Posts />
               </Route>
               <Route exact path="*" >
                 <Page404 />
